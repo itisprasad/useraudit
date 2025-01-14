@@ -31,6 +31,13 @@ $ curl -X POST http://localhost:8000/users/ \
 {"name":"John Doe","email":"john@example.com","id":1}
 ``` 
 
+### Query a specific user
+```bash
+$  curl -X GET http://localhost:8000/users/1
+[{"name":"John Doe","email":"john@example.com","id":1}]
+```
+
+
 ### List all users
 ```bash
 $  curl -X GET http://localhost:8000/users/

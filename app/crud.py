@@ -14,6 +14,13 @@ def create_user(db: Session, user: UserCreate):
 
     return new_user
 
+def get_user(db: Session, user_id: int):
+    existing_user = db.query(User).filter(User.id == user_id).first()
+    if existing_user:
+        return existing_user
+
+    return None
+
 def get_users(db: Session):
     return db.query(User).all()
 
