@@ -47,6 +47,7 @@ curl -X DELETE http://localhost:8000/users/1
 ``` 
 
 ### List audit logs
+```bash
 curl -X GET http://localhost:8000/audit/
 ``` 
 
