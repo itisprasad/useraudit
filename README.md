@@ -1,6 +1,9 @@
 # User Audit
 This is a set of backend services consisting various endpoints to perform CRUD operations to a user table
 
+# Pre-requisites
+1. Docker installed
+
 # Setting up the app
 ## Pull the source code
 ```bash
