@@ -28,12 +28,20 @@ $ docker-compose up --build
 $ curl -X POST http://localhost:8000/users/ \
 -H "Content-Type: application/json" \
 -d '{"name": "John Doe", "email": "john@example.com"}'
-{"name":"John Doe","email":"john@example.com","id":1}
+``` 
+
+Output
+```bash
+{"name":"John Doe","email":"john@example.com","is_deleted":false,"id":1}i
 ``` 
 
 ### Query a specific user
 ```bash
 $  curl -X GET http://localhost:8000/users/1
+```
+
+Output
+```bash
 [{"name":"John Doe","email":"john@example.com","id":1}]
 ```
 
@@ -41,28 +49,40 @@ $  curl -X GET http://localhost:8000/users/1
 ### List all users
 ```bash
 $  curl -X GET http://localhost:8000/users/
-[{"name":"John Doe","email":"john@example.com","id":1}]
+``` 
+
+Output
+```bash
+[{"name":"John Doe","email":"john@example.com","is_deleted":false,"id":1},{"name":"Jane Doe","email":"jane@example.com","is_deleted":false,"id":2}]i
 ``` 
 
 ### Update user
 ```bash
-$ curl -X PUT http://localhost:8000/users/1 \
--H "Content-Type: application/json" \
--d '{"name": "Jane Doe", "email": "jane@example.com"}'
-{"name":"Jane Doe","email":"jane@example.com","id":1}
+$ curl -X PUT http://localhost:8000/users/2 -H "Content-Type: application/json" -d '{"name": "Jane Doe", "email": "jane1@example.com"}'
+``` 
+
+Output
+```bash
+{"name":"Jane Doe","email":"jane1@example.com","is_deleted":false,"id":2}
 ``` 
 
 ### Delete user
 This is a soft delete operation where in the user will be marked as deleted by updating is_deleted attribute to True.  This way, the user data is persisted.
 ```bash
 $ curl -X DELETE http://localhost:8000/users/1
+``` 
+Output
 {"detail":"User deleted"}
 ``` 
 
 ### List audit logs
 ```bash
 $ curl -X GET http://localhost:8000/audit/
-[{"id":1,"action":"CREATE","details":"User created: <app.models.User object at 0x7f8de17294d0>","timestamp":"2025-01-14T03:25:32.074879"},{"id":2,"action":"UPDATE","details":"User updated: <app.models.User object at 0x7f8de13fb6d0>","timestamp":"2025-01-14T03:29:06.095250"},{"id":3,"action":"DELETE","details":"User deleted: <app.models.User object at 0x7f8de0f07450>","timestamp":"2025-01-14T03:30:05.494082"}]
+``` 
+
+Output
+```bash
+[{"id":1,"action":"CREATE","details":"User created: <app.models.User object at 0x7f9fbb1346d0>","timestamp":"2025-01-15T01:46:35.817502"},{"id":2,"action":"CREATE","details":"User created: <app.models.User object at 0x7f9fbb174b50>","timestamp":"2025-01-15T01:52:13.623000"},{"id":3,"action":"UPDATE","details":"User updated: <app.models.User object at 0x7f9fba905050>","timestamp":"2025-01-15T01:54:16.762529"},{"id":4,"action":"UPDATE","details":"User updated: <app.models.User object at 0x7f9fba906d10>","timestamp":"2025-01-15T01:54:51.029560"},{"id":5,"action":"DELETE","details":"User deleted: <app.models.User object at 0x7f9fba9068d0>","timestamp":"2025-01-15T01:56:21.506760"}]
 ``` 
 
 ## Running test case
