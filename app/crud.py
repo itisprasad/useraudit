@@ -15,7 +15,7 @@ def create_user(db: Session, user: UserCreate):
     return new_user
 
 def get_user(db: Session, user_id: int):
-    existing_user = db.query(User).filter(User.id == user_id).first()
+    existing_user = db.query(User).filter(User.id == user_id).filter(User.is_deleted == False).first()
     if existing_user:
         return existing_user
 
@@ -25,7 +25,7 @@ def get_users(db: Session):
     return db.query(User).all()
 
 def update_user(db: Session, user_id: int, user: UserCreate):
-    existing_user = db.query(User).filter(User.id == user_id).first()
+    existing_user = db.query(User).filter(User.id == user_id).filter(User.is_deleted == False).first()
     if existing_user:
         existing_user.name = user.name
         existing_user.email = user.email
@@ -39,14 +39,18 @@ def update_user(db: Session, user_id: int, user: UserCreate):
     return None
 
 def delete_user(db: Session, user_id: int):
-    user = db.query(User).filter(User.id == user_id).first()
+    user = db.query(User).filter(User.id == user_id).filter(User.is_deleted == False).first()
     if user:
-        db.delete(user)
+        user.is_deleted = True
+        # persist user data
+        #db.delete(user)
         db.commit()
 
         log = AuditLog(action="DELETE", details=f"User deleted: {user}")
         db.add(log)
         db.commit()
+        return True
+    return False
 
 def get_audit_logs(db: Session):
     return db.query(AuditLog).all()
