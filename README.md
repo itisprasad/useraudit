@@ -13,6 +13,7 @@ $ git clone git@github.com:itisprasad/useraudit.git
 
 ## Build the app
 ```bash
+$ cd useraudit
 $ docker-compose up --build
 ```    
 
