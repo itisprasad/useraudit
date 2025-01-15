@@ -53,6 +53,7 @@ $ curl -X PUT http://localhost:8000/users/1 \
 ``` 
 
 ### Delete user
+This is a soft delete operation where in the user will be marked as deleted by updating is_deleted attribute to True.  This way, the user data is persisted.
 ```bash
 $ curl -X DELETE http://localhost:8000/users/1
 {"detail":"User deleted"}
