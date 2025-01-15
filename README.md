@@ -4,7 +4,7 @@ This is a set of backend services consisting various endpoints to perform CRUD o
 # Pre-requisites
 ```
 docker installed and Running
-docker-compose toool installed
+docker-compose tool installed
 ```
 
 
