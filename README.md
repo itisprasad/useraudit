@@ -71,7 +71,9 @@ This is a soft delete operation where in the user will be marked as deleted by u
 ```bash
 $ curl -X DELETE http://localhost:8000/users/1
 ``` 
+
 Output
+```bash
 {"detail":"User deleted"}
 ``` 
 
