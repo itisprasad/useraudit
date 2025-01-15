@@ -2,8 +2,10 @@
 This is a set of backend services consisting various endpoints to perform CRUD operations to a user table
 
 # Pre-requisites
+```
 docker installed and Running
 docker-compose toool installed
+```
 
 
 # Setting up the app
